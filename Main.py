@@ -11,3 +11,6 @@ print(normalised_ds, '\n')
 
 ed_matrix = f.form_ed_matrix(normalised_ds)
 print(ed_matrix, '\n')
+
+similarity_matrix = f.similarity_scores(ed_matrix)
+print(similarity_matrix, '\n')

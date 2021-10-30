@@ -16,3 +16,7 @@ def form_ed_matrix(df):
             ed_matrix[i, j] = np.sqrt(np.sum((df[i, :] - df[j, :]) ** 2))
     return ed_matrix
 
+
+def similarity_scores(df):
+    similarity_matrix = np.divide(1, df, out=np.zeros_like(df), where=df != 0)
+    return similarity_matrix
