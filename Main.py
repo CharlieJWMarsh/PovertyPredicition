@@ -14,3 +14,6 @@ print(ed_matrix, '\n')
 
 similarity_matrix = f.similarity_scores(ed_matrix)
 print(similarity_matrix, '\n')
+
+threshold_matrix = f.threshold(2, similarity_matrix)
+print(threshold_matrix, '\n')
