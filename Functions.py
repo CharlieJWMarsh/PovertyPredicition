@@ -37,3 +37,11 @@ def threshold(neighbours, df):
         # Set everything in the row below the score to 0
         df[i, :] = [0 if matrix_row <= max(neighbour_scores) else matrix_row for matrix_row in matrix_row]
     return df
+
+
+def laplacian(df):
+    for i in range(0, np.shape(df)[0]):
+        row_sum = sum(df[i, :])
+        df[i, :] = -(df[i, :]/row_sum)
+        df[i, i] = 1
+    return df

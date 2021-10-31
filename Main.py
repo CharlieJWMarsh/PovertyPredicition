@@ -17,3 +17,6 @@ print(similarity_matrix, '\n')
 
 threshold_matrix = f.threshold(2, similarity_matrix)
 print(threshold_matrix, '\n')
+
+laplacian_matrix = f.laplacian(threshold_matrix)
+print(laplacian_matrix, '\n')
