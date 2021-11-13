@@ -24,18 +24,42 @@ def similarity_scores(df):
     return similarity_matrix
 
 
-# Does the symmetry along leading diagonal matter? x2 on threshold
 # Must be faster/smarter way
-def threshold(neighbours, df):
+def threshold_rows(neighbours, df):
+    # copy separate arrays so that they are not linked
+    df_rows = np.copy(df)
+    df_columns = np.copy(df)
     # Loop for each row
     for i in range(0, np.shape(df)[0]):
-        neighbour_scores = df[i, :]
+        neighbour_rows = df_rows[i, :]
+        neighbour_columns = df_columns[:, i]
         for j in range(0, neighbours):
             # Remove the top stated number of rows
-            neighbour_scores = np.delete(neighbour_scores, np.where(neighbour_scores == max(neighbour_scores)))
-        matrix_row = df[i, :]
+            neighbour_rows = np.delete(neighbour_rows, np.where(neighbour_rows == max(neighbour_rows)))
+            neighbour_columns = np.delete(neighbour_columns, np.where(neighbour_columns == max(neighbour_columns)))
+        matrix_row = df_rows[i, :]
+        matrix_column = df_columns[:, i]
         # Set everything in the row below the score to 0
-        df[i, :] = [0 if matrix_row <= max(neighbour_scores) else matrix_row for matrix_row in matrix_row]
+        df_rows[i, :] = [0 if value <= max(neighbour_rows) else value for value in matrix_row]
+        df_columns[:, i] = [0 if value <= max(neighbour_columns) else value for value in matrix_column]
+    for i in range(0, np.shape(df_rows)[0]):
+        for j in range(0, np.shape(df_rows)[0]):
+            if df_rows[i, j] == 0:
+                df_rows[i, j] = df_columns[i, j]
+    return df_rows
+
+
+def threshold_columns(neighbours, df):
+    # Loop for each row
+    print(df)
+    for i in range(0, np.shape(df)[1]):
+        neighbour_columns = df[:, i]
+        for j in range(0, neighbours):
+            # Remove the top stated number of rows
+            neighbour_columns = np.delete(neighbour_columns, np.where(neighbour_columns == max(neighbour_columns)))
+        matrix_column = df[:, i]
+        # Set everything in the row below the score to 0
+        df[:, i] = [0 if matrix_column <= max(neighbour_columns) else matrix_column for matrix_column in matrix_column]
     return df
 
 
