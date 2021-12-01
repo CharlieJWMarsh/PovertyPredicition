@@ -3,25 +3,27 @@ import numpy as np
 import math
 import Functions as f
 
-# ds = np.array([[1, 2, 3, 4, 5], [6, 13, 6, 4, 2], [3, 4, 5, 6, 7], [9, 10, 11, 12, 13]])
-ds = np.random.rand(5, 5)
-print("ds", '\n', ds, '\n')
+all_data = pd.read_csv('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\most_data.csv')
 
-normalised_ds = f.normalise_ds(ds)
-print("normalised_ds", '\n', normalised_ds, '\n')
 
-ed_matrix = f.form_ed_matrix(normalised_ds)
-print("ed_matrix", '\n', ed_matrix, '\n')
+OAs = all_data['geography_code']
+census_data = all_data.drop(['geography_code'], axis=1)
+census_data = census_data.to_numpy()
 
-similarity_matrix = f.similarity_scores(ed_matrix)
-print("similarity_matrix", '\n', similarity_matrix, '\n')
+# census_data = census_data[0:8000, :]
 
-threshold_matrix = f.threshold_rows(2, similarity_matrix)
-print("threshold_matrix", '\n', threshold_matrix, '\n')
+eigen_values, eigen_vectors = f.diffusion_map(10, census_data)
 
-laplacian_matrix = f.laplacian(threshold_matrix)
-print("laplacian_matrix", '\n', laplacian_matrix, '\n')
+eigen_values = np.asarray(eigen_values)
+eigen_values = eigen_values.reshape(len(eigen_values), 1)
 
-eigen_values, eigen_vectors = np.linalg.eig(laplacian_matrix)
+eigen_vectors = np.asarray(eigen_vectors)
+
+np.savetxt('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Diffusion_eigenvectors\\initial_eigen_values_2.csv',
+           eigen_values, delimiter=',')
+
+np.savetxt('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Diffusion_eigenvectors\\initial_eigen_vectors_2.csv',
+           eigen_vectors, delimiter=',')
+
 print(eigen_values, '\n')
 print(eigen_vectors, '\n')
