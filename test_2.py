@@ -33,7 +33,7 @@ print(array_has_nan)
 
 print(census_data.shape)
 
-census_data = census_data[0:1000, :]
+census_data = census_data[0:10, 0:10]
 
 print(census_data)
 
