@@ -22,22 +22,23 @@ def make_OA_score_data(eigenvalue):
 
 
 # Load eigenvector and eigenvalues from previous section
-file1 = open('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Diffusion_eigenvectors\\Bristol_eigenvalues.csv')
-file2 = open('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Diffusion_eigenvectors\\Bristol_eigenvectors.csv')
+file1 = open('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Diffusion_eigenvectors\\Bristol_eigenvalues_2.csv')
+file2 = open('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Diffusion_eigenvectors\\Bristol_eigenvectors_2.csv')
 eingenvalues = np.loadtxt(file1, delimiter=",")
 eingenvectors = np.loadtxt(file2, delimiter=",")
 
 # Load OA's from input data
-OAs = pd.read_csv('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Input_data\\BristolData.csv')
+OAs = pd.read_csv('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Input_data\\all_data.csv')
 OAs = OAs['geography_code']
 OAs = OAs.to_numpy()
 OAs = OAs.reshape(len(OAs), 1)
 
-ds = make_OA_score_data(3)
+ds = make_OA_score_data(2)
 
 print(ds)
 print(np.shape(ds))
 
 bristol_heatmap_data = pd.DataFrame(ds, columns=['OA', 'score'])
 
-# bristol_heatmap_data.to_csv('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\BristolheatmapData_3.csv', index=False)
+bristol_heatmap_data.to_csv('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Bristolheatmap_alldata_2.csv', index=False)
+

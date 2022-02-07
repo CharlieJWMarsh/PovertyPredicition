@@ -7,7 +7,7 @@ import json
 bristol_json = json.load(open('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\OA_plot_data\\Bristol_OA.geojson', 'r'))
 
 # Load in eigenvector
-geo_df = pd.read_csv('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\BristolheatmapData_2.csv')
+geo_df = pd.read_csv('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Bristolheatmap_alldata_2.csv')
 
 fig = px.choropleth_mapbox(geo_df, locations="OA", color="score", featureidkey="properties.oa11cd", geojson=bristol_json,
                            mapbox_style="carto-positron", center={"lat":51.481951, "lon":-2.526448}, zoom=13)

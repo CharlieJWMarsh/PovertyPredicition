@@ -10,12 +10,12 @@ def normalise_ds(df):
     for i in range(0, np.shape(df)[1]):
         if np.isnan(np.sum(normalised_df[:, i])):
             faulty_columns.insert(0, i)
-    print(faulty_columns)
+    print("faulty columns: ", faulty_columns)
     for i in range(0, len(faulty_columns)):
         normalised_df = np.delete(normalised_df, faulty_columns[i], 1)
-    # np.savetxt('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Diffusion_eigenvectors\\safety_normalised_matrix.csv',
-    #            normalised_df, delimiter=',')
-    print(np.shape(df))
+    np.savetxt('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Diffusion_eigenvectors\\safety_normalised_matrix.csv',
+               normalised_df, delimiter=',')
+    print("shape after normalise: ", np.shape(df))
     return normalised_df
 
 
@@ -25,21 +25,23 @@ def form_ed_matrix(df):
     ed_matrix = np.zeros([np.shape(df)[0], np.shape(df)[0]])
     for i in range(0, np.shape(df)[0]):
         if i % 100 == 1:
-            print(i)
+            print("ed matrix rows done: ", i)
         for j in range(0, np.shape(df)[0]):
             ed_matrix[i, j] = np.sqrt(np.sum((df[i, :] - df[j, :]) ** 2))
         ed_matrix[i, i] = 0
-    # np.savetxt('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Diffusion_eigenvectors\\safety_ed_matrix.csv',
-    #            ed_matrix, delimiter=',')
-    print(np.shape(df))
+        if i % 2000 == 1:
+            print(ed_matrix)
+    print("shape after ed: ", np.shape(df))
+    np.savetxt('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Diffusion_eigenvectors\\safety_ed_matrix.csv',
+               ed_matrix, delimiter=',')
     return ed_matrix
 
 
 def similarity_scores(df):
     similarity_matrix = np.divide(1, df, out=np.zeros_like(df), where=df != 0)
-    # np.savetxt('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Diffusion_eigenvectors\\safety_similarity_martix.csv',
-    #            similarity_matrix, delimiter=',')
-    print(np.shape(df))
+    np.savetxt('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Diffusion_eigenvectors\\safety_similarity_martix.csv',
+               similarity_matrix, delimiter=',')
+    print("shape after similarity score: ", np.shape(df))
     return similarity_matrix
 
 
@@ -50,7 +52,7 @@ def threshold_rows_2(neighbours, df):
     # Loop for each row
     for i in range(0, np.shape(df)[0]):
         if i % 100 == 1:
-            print(i)
+            print("threshold matrix rows done: ", i)
         neighbour_rows = df_rows[i, :]
         neighbour_columns = df_columns[:, i]
         largest_x_in_row = heapq.nlargest(neighbours, neighbour_rows)
@@ -66,9 +68,9 @@ def threshold_rows_2(neighbours, df):
         for j in range(0, np.shape(df_rows)[0]):
             if df_rows[i, j] == 0:
                 df_rows[i, j] = df_columns[i, j]
-    # np.savetxt('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Diffusion_eigenvectors\\safety_threshold_martix.csv',
-    #            df_rows, delimiter=',')
-    print(np.shape(df))
+    np.savetxt('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Diffusion_eigenvectors\\safety_threshold_martix.csv',
+               df_rows, delimiter=',')
+    print("shape after threshold: ", np.shape(df))
     return df_rows
 
 
@@ -77,9 +79,9 @@ def laplacian(df):
         row_sum = sum(df[i, :])
         df[i, :] = -(df[i, :]/row_sum)
         df[i, i] = 1
-    # np.savetxt('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Diffusion_eigenvectors\\safety_laplacian_martix.csv',
-    #            df, delimiter=',')
-    print(np.shape(df))
+    np.savetxt('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Diffusion_eigenvectors\\safety_laplacian_martix.csv',
+               df, delimiter=',')
+    print("shape after laplacian: ", np.shape(df))
     return df
 
 
