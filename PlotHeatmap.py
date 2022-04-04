@@ -6,10 +6,13 @@ import json
 # Load in geojson file
 bristol_json = json.load(open('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\OA_plot_data\\All.geojson', 'r'))
 
-# Load in eigenvector
-# geo_df = pd.read_csv('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Bristolheatmap_alldata_1.csv')
 
-geo_df = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\OA_plot_data\\OAs_with_scores_normalised.csv")
+# geo_df = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Analysis\\RFRegression_test_predictions.csv")
+
+# Deprivation scores
+geo_df = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\OA_plot_data\\OAs_with_scores.csv")
+
+# Best heatmap score
 # geo_df = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_2_normalised.csv")
 
 
