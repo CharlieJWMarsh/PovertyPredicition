@@ -67,13 +67,13 @@ finds average standard deviation away from values in each OA for diffusion map e
 """
 plots histogram of 
 """
-# heatmap_data = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_2_normalised.csv")
-#
-# heatmap_scores = heatmap_data["score"]
-# heatmap_scores = heatmap_scores.to_list()
-#
-# fig = px.histogram(heatmap_scores, nbins=200)
-# fig.show()
+heatmap_data = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_2_normalised.csv")
+
+heatmap_scores = heatmap_data["score"]
+heatmap_scores = heatmap_scores.to_list()
+
+fig = px.histogram(heatmap_scores, nbins=200)
+fig.show()
 
 """
 Compares the splits of the diffusion map and makes it into a excel file 
@@ -91,6 +91,7 @@ Compares the splits of the diffusion map and makes it into a excel file
 #         if splits_range[j][1] > heatmap_data["score"][i] > splits_range[j][0]:
 #             split_sort.append(j)
 #
+# print(split_sort)
 # print(np.shape(all_data))
 #
 # # Makes a list of the number of each OAs in each split
@@ -179,7 +180,7 @@ Compares the splits of the diffusion map and makes it into a excel file
 #         print(df.head())
 #
 #     iteration -= 1
-#
+
 # df.to_csv('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Analysis\\Poverty_comparison.csv', index=False)
 
 """
@@ -219,7 +220,7 @@ Plot a scatter graph of the data of the data against poverty data
 # df_10 = df_10.rename(columns={"score_x": "Eigenvector 10 value", "score_y": "Deprivation score"})
 #
 # fig1 = px.scatter(df_1, x="Deprivation score", y="Eigenvector 1 value", trendline="ols")
-# fig2 = px.scatter(df_2, x="Deprivation score", y="Eigenvector 2 value", trendline="ols")
+# fig2 = px.scatter(df_2, hover_name="OA", x="Deprivation score", y="Eigenvector 2 value", trendline="ols", width=1200, height=800)
 # fig3 = px.scatter(df_3, x="Deprivation score", y="Eigenvector 3 value", trendline="ols")
 # fig4 = px.scatter(df_4, x="Deprivation score", y="Eigenvector 4 value", trendline="ols")
 # fig5 = px.scatter(df_5, x="Deprivation score", y="Eigenvector 5 value", trendline="ols")
@@ -244,7 +245,7 @@ Plot a scatter graph of the data of the data against poverty data
 """
 Compare 2 eigenvectors at once to see if there is a non linear pattern in the data
 """
-#
+
 # heatmap_data_1 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_1.csv")
 # heatmap_data_2 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_2.csv")
 # heatmap_data_3 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_3.csv")
@@ -280,17 +281,17 @@ Compare 2 eigenvectors at once to see if there is a non linear pattern in the da
 # df = df.rename(columns={"score": "Deprivation score"})
 #
 #
-# fig1 = px.scatter(df, x="Eigenvector 3 value", y="Eigenvector 3 value", color="Deprivation score")
-# fig2 = px.scatter(df, x="Eigenvector 4 value", y="Eigenvector 3 value", color="Deprivation score")
-# fig3 = px.scatter(df, x="Eigenvector 5 value", y="Eigenvector 5 value", color="Deprivation score")
-# fig4 = px.scatter(df, x="Eigenvector 6 value", y="Eigenvector 6 value", color="Deprivation score")
-# fig5 = px.scatter(df, x="Eigenvector 7 value", y="Eigenvector 7 value", color="Deprivation score")
-# fig6 = px.scatter(df, x="Eigenvector 8 value", y="Eigenvector 8 value", color="Deprivation score")
-# fig7 = px.scatter(df, x="Eigenvector 9 value", y="Eigenvector 9 value", color="Deprivation score")
-# fig8 = px.scatter(df, x="Eigenvector 10 value", y="Eigenvector 9 value", color="Deprivation score")
+# fig1 = px.scatter(df, x="Eigenvector 2 value", y="Eigenvector 5 value", color="Deprivation score")
+# fig2 = px.scatter(df, x="Eigenvector 2 value", y="Eigenvector 6 value", color="Deprivation score")
+# fig3 = px.scatter(df, x="Eigenvector 2 value", y="Eigenvector 7 value", color="Deprivation score")
+# fig4 = px.scatter(df, x="Eigenvector 2 value", y="Eigenvector 8 value", color="Deprivation score")
+# fig5 = px.scatter(df, x="Eigenvector 2 value", y="Eigenvector 9 value", color="Deprivation score")
+# fig6 = px.scatter(df, x="Eigenvector 2 value", y="Eigenvector 8 value", color="Deprivation score")
+# fig7 = px.scatter(df, x="Eigenvector 2 value", y="Eigenvector 9 value", color="Deprivation score")
+# fig8 = px.scatter(df, x="Eigenvector 2 value", y="Eigenvector 9 value", color="Deprivation score")
 # fig9 = px.scatter(df, x="Eigenvector 2 value", y="Eigenvector 2 value", color="Deprivation score")
-#
-#
+
+
 # fig1.show()
 # fig2.show()
 # fig3.show()
@@ -304,43 +305,43 @@ Compare 2 eigenvectors at once to see if there is a non linear pattern in the da
 """
 Compare 3 eigenvectors at once to see if there is a non linear pattern in the data
 """
-heatmap_data_1 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_1.csv")
-heatmap_data_2 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_2.csv")
-heatmap_data_3 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_3.csv")
-heatmap_data_4 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_4.csv")
-heatmap_data_5 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_5.csv")
-heatmap_data_6 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_6.csv")
-heatmap_data_7 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_7.csv")
-heatmap_data_8 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_8.csv")
-heatmap_data_9 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_9.csv")
-heatmap_data_10 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_10.csv")
-poverty_score_data = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\OA_plot_data\\OAs_with_scores.csv")
-
-
-df = pd.merge(heatmap_data_1, heatmap_data_2, on='OA')
-df = df.rename(columns={"score_x": "Eigenvector 1 value", "score_y": "Eigenvector 2 value"})
-df = pd.merge(df, heatmap_data_3, on='OA')
-df = df.rename(columns={"score": "Eigenvector 3 value"})
-df = pd.merge(df, heatmap_data_4, on='OA')
-df = df.rename(columns={"score": "Eigenvector 4 value"})
-df = pd.merge(df, heatmap_data_5, on='OA')
-df = df.rename(columns={"score": "Eigenvector 5 value"})
-df = pd.merge(df, heatmap_data_6, on='OA')
-df = df.rename(columns={"score": "Eigenvector 6 value"})
-df = pd.merge(df, heatmap_data_7, on='OA')
-df = df.rename(columns={"score": "Eigenvector 7 value"})
-df = pd.merge(df, heatmap_data_8, on='OA')
-df = df.rename(columns={"score": "Eigenvector 8 value"})
-df = pd.merge(df, heatmap_data_9, on='OA')
-df = df.rename(columns={"score": "Eigenvector 9 value"})
-df = pd.merge(df, heatmap_data_10, on='OA')
-df = df.rename(columns={"score": "Eigenvector 10 value"})
-df = pd.merge(df, poverty_score_data, on='OA')
-df = df.rename(columns={"score": "Deprivation score"})
-
-
-fig1 = px.scatter_3d(df, x="Eigenvector 7 value", y="Eigenvector 2 value", z="Eigenvector 6 value", color="Deprivation score")
-fig1.update_traces(marker_size=3)
+# heatmap_data_1 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_1.csv")
+# heatmap_data_2 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_2.csv")
+# heatmap_data_3 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_3.csv")
+# heatmap_data_4 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_4.csv")
+# heatmap_data_5 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_5.csv")
+# heatmap_data_6 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_6.csv")
+# heatmap_data_7 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_7.csv")
+# heatmap_data_8 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_8.csv")
+# heatmap_data_9 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_9.csv")
+# heatmap_data_10 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_10.csv")
+# poverty_score_data = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\OA_plot_data\\OAs_with_scores.csv")
+#
+#
+# df = pd.merge(heatmap_data_1, heatmap_data_2, on='OA')
+# df = df.rename(columns={"score_x": "Eigenvector 1 value", "score_y": "Eigenvector 2 value"})
+# df = pd.merge(df, heatmap_data_3, on='OA')
+# df = df.rename(columns={"score": "Eigenvector 3 value"})
+# df = pd.merge(df, heatmap_data_4, on='OA')
+# df = df.rename(columns={"score": "Eigenvector 4 value"})
+# df = pd.merge(df, heatmap_data_5, on='OA')
+# df = df.rename(columns={"score": "Eigenvector 5 value"})
+# df = pd.merge(df, heatmap_data_6, on='OA')
+# df = df.rename(columns={"score": "Eigenvector 6 value"})
+# df = pd.merge(df, heatmap_data_7, on='OA')
+# df = df.rename(columns={"score": "Eigenvector 7 value"})
+# df = pd.merge(df, heatmap_data_8, on='OA')
+# df = df.rename(columns={"score": "Eigenvector 8 value"})
+# df = pd.merge(df, heatmap_data_9, on='OA')
+# df = df.rename(columns={"score": "Eigenvector 9 value"})
+# df = pd.merge(df, heatmap_data_10, on='OA')
+# df = df.rename(columns={"score": "Eigenvector 10 value"})
+# df = pd.merge(df, poverty_score_data, on='OA')
+# df = df.rename(columns={"score": "Deprivation score"})
+#
+#
+# fig1 = px.scatter_3d(df, x="Eigenvector 2 value", y="Eigenvector 8 value", z="Eigenvector 9 value", color="Deprivation score")
+# fig1.update_traces(marker_size=3)
 # fig2 = px.scatter_3d(df, x="Eigenvector 9 value", y="Eigenvector 2 value", z="Eigenvector 3 value", color="Deprivation score")
 # fig2.update_traces(marker_size=3)
 # fig3 = px.scatter_3d(df, x="Eigenvector 9 value", y="Eigenvector 2 value", z="Eigenvector 4 value", color="Deprivation score")
@@ -357,7 +358,7 @@ fig1.update_traces(marker_size=3)
 # fig8.update_traces(marker_size=3)
 
 
-fig1.show()
+# fig1.show()
 # fig2.show()
 # fig3.show()
 # fig4.show()
