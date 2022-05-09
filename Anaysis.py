@@ -67,13 +67,13 @@ finds average standard deviation away from values in each OA for diffusion map e
 """
 plots histogram of 
 """
-heatmap_data = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_2_normalised.csv")
-
-heatmap_scores = heatmap_data["score"]
-heatmap_scores = heatmap_scores.to_list()
-
-fig = px.histogram(heatmap_scores, nbins=200)
-fig.show()
+# heatmap_data = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_2_normalised.csv")
+#
+# heatmap_scores = heatmap_data["score"]
+# heatmap_scores = heatmap_scores.to_list()
+#
+# fig = px.histogram(heatmap_scores, nbins=200)
+# fig.show()
 
 """
 Compares the splits of the diffusion map and makes it into a excel file 
@@ -218,9 +218,9 @@ Plot a scatter graph of the data of the data against poverty data
 # df_9 = df_9.rename(columns={"score_x": "Eigenvector 9 value", "score_y": "Deprivation score"})
 # df_10 = pd.merge(heatmap_data_10, poverty_score_data, on='OA')
 # df_10 = df_10.rename(columns={"score_x": "Eigenvector 10 value", "score_y": "Deprivation score"})
-#
+
 # fig1 = px.scatter(df_1, x="Deprivation score", y="Eigenvector 1 value", trendline="ols")
-# fig2 = px.scatter(df_2, hover_name="OA", x="Deprivation score", y="Eigenvector 2 value", trendline="ols", width=1200, height=800)
+# fig2 = px.scatter(df_2, hover_name="OA", x="Deprivation score", y="Eigenvector 2 value", trendline="ols")
 # fig3 = px.scatter(df_3, x="Deprivation score", y="Eigenvector 3 value", trendline="ols")
 # fig4 = px.scatter(df_4, x="Deprivation score", y="Eigenvector 4 value", trendline="ols")
 # fig5 = px.scatter(df_5, x="Deprivation score", y="Eigenvector 5 value", trendline="ols")
@@ -229,8 +229,9 @@ Plot a scatter graph of the data of the data against poverty data
 # fig8 = px.scatter(df_8, x="Deprivation score", y="Eigenvector 8 value", trendline="ols")
 # fig9 = px.scatter(df_9, x="Deprivation score", y="Eigenvector 9 value", trendline="ols")
 # fig10 = px.scatter(df_10, x="Deprivation score", y="Eigenvector 10 value", trendline="ols")
-#
+
 # fig1.show()
+# fig2.update_layout(font=dict(size=26))
 # fig2.show()
 # fig3.show()
 # fig4.show()
@@ -282,10 +283,15 @@ Compare 2 eigenvectors at once to see if there is a non linear pattern in the da
 #
 #
 # fig1 = px.scatter(df, x="Eigenvector 2 value", y="Eigenvector 5 value", color="Deprivation score")
+# fig1.update_layout(font=dict(size=32))
 # fig2 = px.scatter(df, x="Eigenvector 2 value", y="Eigenvector 6 value", color="Deprivation score")
+# fig2.update_layout(font=dict(size=32))
 # fig3 = px.scatter(df, x="Eigenvector 2 value", y="Eigenvector 7 value", color="Deprivation score")
+# fig3.update_layout(font=dict(size=32))
 # fig4 = px.scatter(df, x="Eigenvector 2 value", y="Eigenvector 8 value", color="Deprivation score")
+# fig4.update_layout(font=dict(size=32))
 # fig5 = px.scatter(df, x="Eigenvector 2 value", y="Eigenvector 9 value", color="Deprivation score")
+# fig5.update_layout(font=dict(size=32))
 # fig6 = px.scatter(df, x="Eigenvector 2 value", y="Eigenvector 8 value", color="Deprivation score")
 # fig7 = px.scatter(df, x="Eigenvector 2 value", y="Eigenvector 9 value", color="Deprivation score")
 # fig8 = px.scatter(df, x="Eigenvector 2 value", y="Eigenvector 9 value", color="Deprivation score")
@@ -338,9 +344,10 @@ Compare 3 eigenvectors at once to see if there is a non linear pattern in the da
 # df = df.rename(columns={"score": "Eigenvector 10 value"})
 # df = pd.merge(df, poverty_score_data, on='OA')
 # df = df.rename(columns={"score": "Deprivation score"})
-#
-#
+
+
 # fig1 = px.scatter_3d(df, x="Eigenvector 2 value", y="Eigenvector 8 value", z="Eigenvector 9 value", color="Deprivation score")
+# fig1.update_layout(font=dict(size=18))
 # fig1.update_traces(marker_size=3)
 # fig2 = px.scatter_3d(df, x="Eigenvector 9 value", y="Eigenvector 2 value", z="Eigenvector 3 value", color="Deprivation score")
 # fig2.update_traces(marker_size=3)

@@ -23,7 +23,7 @@ Use SVM to classify a single percentage
 #
 #
 ########################################################################################################
-percentage_in_poverty = 21
+percentage_in_poverty = 63
 
 poverty_score_data = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\OA_plot_data\\OAs_with_scores.csv")
 
@@ -142,7 +142,7 @@ df["predictions"] = predictions
 print(df.head())
 print(type(df))
 
-df.to_csv('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Results\\Diffusion_Map_21_Predictions.csv', index=False)
+df.to_csv('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Results\\Diffusion_Map_63_Predictions.csv', index=False)
 
 
 # # Calculations for the hyperplane
@@ -151,16 +151,18 @@ df.to_csv('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Results\\Diffusio
 # zz = -(w[0]/w[2])*xx - (w[1]/w[2])*yy - model.intercept_[0]/w[2]
 #
 #
-# fig = px.scatter_3d(df, x="Eigenvector 2 value", y="Eigenvector 8 value", z="Eigenvector 9 value", color="predictions",
-#                     hover_name="OA", range_z=[-0.05, 0.1], labels={"b": "OA predicted to be in poverty"})
-# fig.update_traces(marker_size=3)
-# fig.add_traces(go.Surface(x=xx, y=yy, z=zz, opacity=.5, surfacecolor=np.zeros(zz.shape), colorscale=[[0, 'grey']]))
+# fig = px.scatter_3d(df, x="Eigenvector 2 value", y="Eigenvector 8 value", z="Eigenvector 9 value", color="b",
+#                     hover_name="OA", range_z=[-0.05, 0.1], labels={"b": "OA predicted to be in poverty"},
+#                     color_continuous_scale='Bluered')
+# fig.update_traces(marker_size=6)
+# fig.update_layout(font=dict(size=16))
+# # fig.add_traces(go.Surface(x=xx, y=yy, z=zz, opacity=.5, surfacecolor=np.zeros(zz.shape), colorscale=[[0, 'grey']]))
 # fig.show()
 
 """
 Use SVM to classify all percentages
 """
-#
+
 # ########################################################################################################
 # #
 # #
@@ -275,7 +277,8 @@ Use SVM to classify all percentages
 # AUC = pd.DataFrame(list(zip(TPR_list, FPR_list)), columns=["True Positive Rate", "False Positive Rate"])
 # print(AUC.head(100))
 #
-# fig = px.line(AUC, x="False Positive Rate", y="True Positive Rate", width=800, height=800)
+# fig = px.line(AUC, x="False Positive Rate", y="True Positive Rate", width=1000, height=800)
+# fig.update_layout(font=dict(size=26))
 # fig.show()
 #
 # sm = 0

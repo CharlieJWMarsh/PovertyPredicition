@@ -10,8 +10,12 @@ pd.set_option('display.max_rows', 500)
 pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
 
+
+"""
+Make split and upload it 
+"""
 all_data = pd.read_csv('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Input_data\\all_data.csv')
-diffusion_map_predictions = pd.read_csv('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Results\\Diffusion_Map_21_Predictions.csv')
+diffusion_map_predictions = pd.read_csv('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Results\\Diffusion_Map_63_Predictions.csv')
 
 diffusion_map_predictions = diffusion_map_predictions[['OA', 'predictions']]
 
@@ -117,4 +121,8 @@ df["display_names"] = display_names
 
 print(df.head())
 
-# df.to_csv('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Results\\Diffusion_map_all_21_split.csv', index=False)
+df.to_csv('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Results\\Diffusion_map_all_63_split.csv', index=False)
+
+"""
+Split the answers into respective classes
+"""

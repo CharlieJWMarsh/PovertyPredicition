@@ -158,6 +158,7 @@ Comparing accuracy of prediction by looking at classification by percentage
 # print(AUC.to_string())
 #
 # fig = px.line(AUC, x="False Positive Rate", y="True Positive Rate", width=800, height=800)
+# fig.update_layout(font=dict(size=26))
 # fig.show()
 #
 # sm = 0
@@ -171,66 +172,11 @@ Comparing accuracy of prediction by looking at classification by percentage
 Find number of false predicitions
 """
 
-# poverty_score_data = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\OA_plot_data\\OAs_with_scores.csv")
-# heatmap_data_2 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_2.csv")
-#
-# total_false_predictions = [0] * len(poverty_score_data)
-# print(len(total_false_predictions))
-#
-# for j in range(1, 99):
-#     number_in_poverty = round((len(poverty_score_data) / 100) * j)
-#
-#     # print('\n')
-#     # print("Number of OAs: ", len(poverty_score_data))
-#     # print("Percent in poverty: ", j)
-#     # print("Number in poverty: ", number_in_poverty)
-#
-#     classification = []
-#     count = 0
-#     for i in range(0, len(poverty_score_data)):
-#         if count < number_in_poverty:
-#             classification.append(1)
-#         else:
-#             classification.append(0)
-#         count += 1
-#
-#     df = pd.merge(poverty_score_data, heatmap_data_2, on='OA')
-#     df = df.rename(columns={"score_x": "DeprivaionScore", "score_y": "EV2Value"})
-#
-#     df = df.sort_values("DeprivaionScore", ascending=False)
-#     df['DeprivationClassification'] = classification
-#
-#     df = df.sort_values("EV2Value", ascending=False)
-#     df['EV2Classification'] = classification
-#
-#     df = df.sort_index()
-#
-#     for i in range(0, len(df)):
-#         if df["DeprivationClassification"][i] == 1 and df["EV2Classification"][i] == 0:
-#             total_false_predictions[i] += 1
-#         elif df["DeprivationClassification"][i] == 0 and df["EV2Classification"][i] == 1:
-#             total_false_predictions[i] += 1
-#
-# # print(total_false_predictions)
-#
-# df["False classifications"] = total_false_predictions
-#
-# print(df.head(30))
-#
-# fig = px.scatter(df, hover_name="OA", x="DeprivaionScore", y="EV2Value", color="False classifications", trendline="ols")
-# fig.show()
-
-"""
-Find number of false positives and negatives
-"""
-
 poverty_score_data = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\OA_plot_data\\OAs_with_scores.csv")
 heatmap_data_2 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_2.csv")
 
-total_false_positive_predictions = [0] * len(poverty_score_data)
-print(len(total_false_positive_predictions))
-total_false_negative_predictions = [0] * len(poverty_score_data)
-print(len(total_false_positive_predictions))
+total_false_predictions = [0] * len(poverty_score_data)
+print(len(total_false_predictions))
 
 for j in range(1, 99):
     number_in_poverty = round((len(poverty_score_data) / 100) * j)
@@ -262,23 +208,80 @@ for j in range(1, 99):
 
     for i in range(0, len(df)):
         if df["DeprivationClassification"][i] == 1 and df["EV2Classification"][i] == 0:
-            total_false_negative_predictions[i] += 1
+            total_false_predictions[i] += 1
         elif df["DeprivationClassification"][i] == 0 and df["EV2Classification"][i] == 1:
-            total_false_positive_predictions[i] += 1
+            total_false_predictions[i] += 1
 
 # print(total_false_predictions)
 
-df["False negative classifications"] = total_false_negative_predictions
-df["False positive classifications"] = total_false_positive_predictions
+df["False classifications"] = total_false_predictions
 
 print(df.head(30))
 
-fig1 = px.scatter(df, hover_name="OA", x="DeprivaionScore", y="EV2Value", color="False negative classifications", trendline="ols")
-fig1.show()
-fig2 = px.scatter(df, hover_name="OA", x="DeprivaionScore", y="EV2Value", color="False positive classifications", trendline="ols")
-fig2.show()
+fig = px.scatter(df, hover_name="OA", x="DeprivaionScore", y="EV2Value", color="False classifications", trendline="ols",
+                 labels={"DeprivaionScore": "Deprivation Score", "EV2Value": "EV2 Value"})
+fig.update_layout(font=dict(size=24))
+fig.show()
 
-df.to_csv('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Analysis\\EV2FPs.csv', index=False)
+"""
+Find number of false positives and negatives
+"""
+
+# poverty_score_data = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\OA_plot_data\\OAs_with_scores.csv")
+# heatmap_data_2 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_2.csv")
+#
+# total_false_positive_predictions = [0] * len(poverty_score_data)
+# print(len(total_false_positive_predictions))
+# total_false_negative_predictions = [0] * len(poverty_score_data)
+# print(len(total_false_positive_predictions))
+#
+# for j in range(1, 99):
+#     number_in_poverty = round((len(poverty_score_data) / 100) * j)
+#
+#     # print('\n')
+#     # print("Number of OAs: ", len(poverty_score_data))
+#     # print("Percent in poverty: ", j)
+#     # print("Number in poverty: ", number_in_poverty)
+#
+#     classification = []
+#     count = 0
+#     for i in range(0, len(poverty_score_data)):
+#         if count < number_in_poverty:
+#             classification.append(1)
+#         else:
+#             classification.append(0)
+#         count += 1
+#
+#     df = pd.merge(poverty_score_data, heatmap_data_2, on='OA')
+#     df = df.rename(columns={"score_x": "DeprivaionScore", "score_y": "EV2Value"})
+#
+#     df = df.sort_values("DeprivaionScore", ascending=False)
+#     df['DeprivationClassification'] = classification
+#
+#     df = df.sort_values("EV2Value", ascending=False)
+#     df['EV2Classification'] = classification
+#
+#     df = df.sort_index()
+#
+#     for i in range(0, len(df)):
+#         if df["DeprivationClassification"][i] == 1 and df["EV2Classification"][i] == 0:
+#             total_false_negative_predictions[i] += 1
+#         elif df["DeprivationClassification"][i] == 0 and df["EV2Classification"][i] == 1:
+#             total_false_positive_predictions[i] += 1
+#
+# # print(total_false_predictions)
+#
+# df["False negative classifications"] = total_false_negative_predictions
+# df["False positive classifications"] = total_false_positive_predictions
+#
+# print(df.head(30))
+#
+# fig1 = px.scatter(df, hover_name="OA", x="DeprivaionScore", y="EV2Value", color="False negative classifications", trendline="ols")
+# fig1.show()
+# fig2 = px.scatter(df, hover_name="OA", x="DeprivaionScore", y="EV2Value", color="False positive classifications", trendline="ols")
+# fig2.show()
+
+# df.to_csv('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Analysis\\EV2FPs.csv', index=False)
 
 
 """

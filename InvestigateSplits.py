@@ -241,94 +241,112 @@ for i in range(2, len(overall_scores)):
 
 useful_overall_scores = useful_overall_scores.head(20)
 useful_overall_scores = useful_overall_scores.reset_index()
-
-print(useful_overall_scores.head(40))
-
+#
+# print(useful_overall_scores.head(40))
+#
 # fig1 = px.bar(useful_overall_scores, x='variable.2', y='1 - 0', labels={'variable.2': "Variables", '1 - 0': "Joint standard deviations away"})
+# fig1.update_layout(font=dict(size=20))
 # fig1.show()
-# print(useful_overall_scores['variable.2'])
+# # print(useful_overall_scores['variable.2'])
 
 
 """
-
+Plot eigenvectors against score
 """
 
-heatmap_data_1 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_1.csv")
-heatmap_data_2 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_2.csv")
-heatmap_data_3 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_3.csv")
-heatmap_data_4 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_4.csv")
-heatmap_data_5 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_5.csv")
-heatmap_data_6 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_6.csv")
-heatmap_data_7 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_7.csv")
-heatmap_data_8 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_8.csv")
-heatmap_data_9 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_9.csv")
-heatmap_data_10 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_10.csv")
-poverty_score_data = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\OA_plot_data\\OAs_with_scores.csv")
-
-
-df = pd.merge(heatmap_data_1, heatmap_data_2, on='OA')
-df = df.rename(columns={"score_x": "Eigenvector 1 value", "score_y": "Eigenvector 2 value"})
-df = pd.merge(df, heatmap_data_3, on='OA')
-df = df.rename(columns={"score": "Eigenvector 3 value"})
-df = pd.merge(df, heatmap_data_4, on='OA')
-df = df.rename(columns={"score": "Eigenvector 4 value"})
-df = pd.merge(df, heatmap_data_5, on='OA')
-df = df.rename(columns={"score": "Eigenvector 5 value"})
-df = pd.merge(df, heatmap_data_6, on='OA')
-df = df.rename(columns={"score": "Eigenvector 6 value"})
-df = pd.merge(df, heatmap_data_7, on='OA')
-df = df.rename(columns={"score": "Eigenvector 7 value"})
-df = pd.merge(df, heatmap_data_8, on='OA')
-df = df.rename(columns={"score": "Eigenvector 8 value"})
-df = pd.merge(df, heatmap_data_9, on='OA')
-df = df.rename(columns={"score": "Eigenvector 9 value"})
-df = pd.merge(df, heatmap_data_10, on='OA')
-df = df.rename(columns={"score": "Eigenvector 10 value"})
-df = pd.merge(df, poverty_score_data, on='OA')
-df = df.rename(columns={"score": "Deprivation score"})
-
-# print(df.head())
-
-all_data = pd.read_csv('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Input_data\\all_data.csv')
-all_data = all_data.rename(columns={"geography_code": "OA"})
-
-score = [0] * len(all_data)
-
-for j in range(0, len(useful_overall_scores)):
-    var = useful_overall_scores["variable.2"][j]
-    column = all_data.loc[:, str(var)]
-    column_as_list = list(column)
-
-    list_mean = statistics.mean(column_as_list)
-    list_sd = statistics.stdev(column_as_list)
-    for i in range(0, len(column_as_list)):
-        column_as_list[i] = (column_as_list[i] - list_mean) / list_sd
-
-    score = [x + y for x, y in zip(score, column_as_list)]
-
-print(score)
-
-for i in range(0, len(score)):
-    if score[i] > 150:
-        score[i] = 5
-
-df["score"] = score
-
-fig1 = px.scatter(df, hover_name="OA", x="score", y="Eigenvector 1 value", color="Deprivation score")
-fig1.show()
-fig2 = px.scatter(df, hover_name="OA", x="score", y="Eigenvector 3 value", color="Deprivation score")
-fig2.show()
-fig3 = px.scatter(df, hover_name="OA", x="score", y="Eigenvector 4 value", color="Deprivation score")
-fig3.show()
-fig4 = px.scatter(df, hover_name="OA", x="score", y="Eigenvector 5 value", color="Deprivation score")
-fig4.show()
-fig5 = px.scatter(df, hover_name="OA", x="score", y="Eigenvector 6 value", color="Deprivation score")
-fig5.show()
-fig6 = px.scatter(df, hover_name="OA", x="score", y="Eigenvector 7 value", color="Deprivation score")
-fig6.show()
-fig7 = px.scatter(df, hover_name="OA", x="score", y="Eigenvector 8 value", color="Deprivation score")
-fig7.show()
-fig8 = px.scatter(df, hover_name="OA", x="score", y="Eigenvector 9 value", color="Deprivation score")
-fig8.show()
-fig9 = px.scatter(df, hover_name="OA", x="score", y="Eigenvector 10 value", color="Deprivation score")
-fig9.show()
+# heatmap_data_1 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_1.csv")
+# heatmap_data_2 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_2.csv")
+# heatmap_data_3 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_3.csv")
+# heatmap_data_4 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_4.csv")
+# heatmap_data_5 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_5.csv")
+# heatmap_data_6 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_6.csv")
+# heatmap_data_7 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_7.csv")
+# heatmap_data_8 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_8.csv")
+# heatmap_data_9 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_9.csv")
+# heatmap_data_10 = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Heatmaps\\Heatmap_data_10.csv")
+# poverty_score_data = pd.read_csv("C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\OA_plot_data\\OAs_with_scores.csv")
+#
+#
+# df = pd.merge(heatmap_data_1, heatmap_data_2, on='OA')
+# df = df.rename(columns={"score_x": "Eigenvector 1 value", "score_y": "Eigenvector 2 value"})
+# df = pd.merge(df, heatmap_data_3, on='OA')
+# df = df.rename(columns={"score": "Eigenvector 3 value"})
+# df = pd.merge(df, heatmap_data_4, on='OA')
+# df = df.rename(columns={"score": "Eigenvector 4 value"})
+# df = pd.merge(df, heatmap_data_5, on='OA')
+# df = df.rename(columns={"score": "Eigenvector 5 value"})
+# df = pd.merge(df, heatmap_data_6, on='OA')
+# df = df.rename(columns={"score": "Eigenvector 6 value"})
+# df = pd.merge(df, heatmap_data_7, on='OA')
+# df = df.rename(columns={"score": "Eigenvector 7 value"})
+# df = pd.merge(df, heatmap_data_8, on='OA')
+# df = df.rename(columns={"score": "Eigenvector 8 value"})
+# df = pd.merge(df, heatmap_data_9, on='OA')
+# df = df.rename(columns={"score": "Eigenvector 9 value"})
+# df = pd.merge(df, heatmap_data_10, on='OA')
+# df = df.rename(columns={"score": "Eigenvector 10 value"})
+# df = pd.merge(df, poverty_score_data, on='OA')
+# df = df.rename(columns={"score": "Deprivation score"})
+#
+# # print(df.head())
+#
+# all_data = pd.read_csv('C:\\Users\\charl\\OneDrive\\Documents\\2011 Census\\Input_data\\all_data.csv')
+# all_data = all_data.rename(columns={"geography_code": "OA"})
+#
+# score = [0] * len(all_data)
+#
+# for j in range(0, len(useful_overall_scores)):
+#     var = useful_overall_scores["variable.2"][j]
+#     column = all_data.loc[:, str(var)]
+#     column_as_list = list(column)
+#
+#     list_mean = statistics.mean(column_as_list)
+#     list_sd = statistics.stdev(column_as_list)
+#     for i in range(0, len(column_as_list)):
+#         column_as_list[i] = (column_as_list[i] - list_mean) / list_sd
+#
+#     score = [x + y for x, y in zip(score, column_as_list)]
+#
+# print(score)
+#
+# for i in range(0, len(score)):
+#     if score[i] > 150:
+#         score[i] = 5
+#
+# df["Poorly classified variables combined score"] = score
+#
+# fig1 = px.scatter(df, hover_name="OA", x="Poorly classified variables combined score", y="Eigenvector 1 value", color="Deprivation score")
+# fig1.update_layout(font=dict(size=32))
+# fig1.show()
+#
+# fig2 = px.scatter(df, hover_name="OA", x="Poorly classified variables combined score", y="Eigenvector 3 value", color="Deprivation score")
+# fig2.update_layout(font=dict(size=32))
+# fig2.show()
+#
+# fig3 = px.scatter(df, hover_name="OA", x="Poorly classified variables combined score", y="Eigenvector 4 value", color="Deprivation score")
+# fig3.update_layout(font=dict(size=32))
+# fig3.show()
+#
+# fig4 = px.scatter(df, hover_name="OA", x="Poorly classified variables combined score", y="Eigenvector 5 value", color="Deprivation score")
+# fig4.update_layout(font=dict(size=32))
+# fig4.show()
+#
+# fig5 = px.scatter(df, hover_name="OA", x="Poorly classified variables combined score", y="Eigenvector 6 value", color="Deprivation score")
+# fig5.update_layout(font=dict(size=32))
+# fig5.show()
+#
+# fig6 = px.scatter(df, hover_name="OA", x="Poorly classified variables combined score", y="Eigenvector 7 value", color="Deprivation score")
+# fig6.update_layout(font=dict(size=32))
+# fig6.show()
+#
+# fig7 = px.scatter(df, hover_name="OA", x="Poorly classified variables combined score", y="Eigenvector 8 value", color="Deprivation score")
+# fig7.update_layout(font=dict(size=32))
+# fig7.show()
+#
+# fig8 = px.scatter(df, hover_name="OA", x="Poorly classified variables combined score", y="Eigenvector 9 value", color="Deprivation score")
+# fig8.update_layout(font=dict(size=32))
+# fig8.show()
+#
+# fig9 = px.scatter(df, hover_name="OA", x="Poorly classified variables combined score", y="Eigenvector 10 value", color="Deprivation score")
+# fig9.update_layout(font=dict(size=32))
+# fig9.show()
